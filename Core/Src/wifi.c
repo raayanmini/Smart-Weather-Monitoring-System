@@ -4,8 +4,8 @@
 #include <string.h>
 #define RX_BUF_SIZE 690
 
-#define SSID	"No Devices Found..."
-#define SSID_PASSWORD	"24681012"
+#define WIFI_SSID	"No Devices Found..."
+#define WIFI_PASSWORD	"24681012"
 #define SERVER_IP	"142.93.218.33"
 
 short timeout_flag=0;
@@ -51,7 +51,7 @@ short int wifi_feedback(char sub[],uint16_t timeout)
 int wifi_init(void)
 {
 	enum wifi_cmd{AT,AT_RST,AT_CWMODE,AT_CWJAP,AT_CIFSR,AT_CIPMUX,AT_CIPMODE};
-	const char *const wifi_cmds[]={"AT\r\n","AT+RST\r\n","AT+CWMODE=3\r\n","AT+CWJAP=\""SSID"\",\""SSID_PASSWORD"\r\n",
+	const char *const wifi_cmds[]={"AT\r\n","AT+RST\r\n","AT+CWMODE=3\r\n","AT+CWJAP=\""WIFI_SSID"\",\""WIFI_PASSWORD"\r\n",
 						"AT+CIFSR\r\n","AT+CIPMUX=0\r\n","AT+CIPMODE=0\r\n"};
 	int test=1;
 	int count=1;
