@@ -1,0 +1,43 @@
+# === STM32CubeIDE build directories for all projects ===
+**/Debug/
+**/Release/
+
+# === Auto-generated HAL drivers and CMSIS (unmodified) ===
+**/Drivers/STM32*/
+**/Drivers/CMSIS/Device/
+**/Drivers/CMSIS/Include/
+
+# === Middleware (ignore if unmodified) ===
+**/Middlewares/STM32_USB_Device_Library/
+**/Middlewares/Third_Party/FatFs/
+**/Middlewares/Third_Party/FreeRTOS/
+**/Middlewares/Third_Party/LwIP/
+
+# === IDE-specific cache and logs ===
+**/*.launch
+**/*.log
+**/*.bin
+**/*.elf
+**/*.hex
+**/*.map
+
+# === Backups and temp files ===
+**/Backup*/
+**/*.tmp
+
+# === OS-specific clutter ===
+.DS_Store
+Thumbs.db
+
+# === Build system artifacts ===
+**/*.o
+**/*.d
+**/*.lst
+**/*.su
+
+# === Keep important project files and folders ===
+!**/Core/
+!**/*.ioc
+!**/.cproject
+!**/.project
+!**/.settings/
