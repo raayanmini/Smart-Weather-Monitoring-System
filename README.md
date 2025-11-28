@@ -92,8 +92,8 @@ So after importing the project:
 
 2. Click Project → Generate Code (or the “gear” icon in the CubeMX view).
 
->Confirm that Drivers/ and Middlewares/ folders are now populated.
->If you skip this step, the build will fail because those folders are not in the repo by design.
+>Confirm that Drivers/ and Middlewares/ folders are now populated.  
+>If you skip this step, the build will fail because those folders are not in the repo by design.  
 
 
 ### 3\. Set Your WiFi / Server Details
@@ -120,7 +120,7 @@ Right now I’m just sending data every 5 seconds. For a real deployment you’d
 
 ## 📸 Demo
 
-[![Watch the Demo Video](https://img.youtube.com/vi/wjii8i1-mzw/maxresdefault.jpg)](https://www.youtube.com/watch?v=wjii8i1-mzw)
+[![Watch the Demo Video](<iframe width="854" height="480" src="https://www.youtube.com/embed/wjii8i1-mzw" title="Embedded Sysetms Projects | Smart Weather Monitoring System | Kernel Masters Students Projects#trend" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>)
 
 > 🎥 Click the image to watch the Smart Weather Monitor System in action!
 
