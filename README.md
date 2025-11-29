@@ -5,7 +5,7 @@ This version of SWMS runs on **STM32F401RBT6 (RaayanMini)** with a **16x2 monoch
 It reads temperature from the **LM35** via ADC, shows **time, date and temperature** on a **16x2 HD44780-compatible LCD**, and periodically pushes the current temperature to a remote server using an **ESP8266** (AT commands over UART).  
 An external **I²C RTC** keeps track of date/time, and there is basic **offline logging** to an I²C EEPROM/FRAM when WiFi is down. All the logic is split into **FreeRTOS tasks**, so different functionalities run in parallel instead of one big blocking loop.
 
-This project is intentionally written as a **learning project by Kernel Masters students** – the goal is to practice ADC, I²C, UART, RTOS basics, and simple IoT-style communication on STM32F4, not to build a production-grade weather station.
+This is a **prototyping firmware developed by Kernel Masters students** – the goal is to explore ADC, I²C, UART, RTOS basics and simple IoT-style communication on STM32F4, not to build a production-grade weather station.
 
 * * *
 
@@ -19,7 +19,7 @@ This project is intentionally written as a **learning project by Kernel Masters 
     
 -   **RTC**: DS1307/DS3231 module over **I²C1** (`0x68`)
     
--   **Non-Volatile Log (optional)**: I²C EEPROM / FRAM (`0x50`) for basic offline logging
+-   **Non-Volatile Log (optional)**: I²C EEPROM (`0x50`) for basic offline logging
     
 -   **WiFi Module**: ESP8266 in AT-command mode on UART
     
@@ -64,7 +64,7 @@ Exact pin mapping is configured inside the **`.ioc`** file and generated code; t
         
         -   If WiFi is OK, it lets the upload task run.
             
-        -   If WiFi is down, it logs a simple record (timestamp + temp) to an I²C EEPROM/FRAM.
+        -   If WiFi is down, it logs a simple record (timestamp + temp) to an I²C EEPROM.
             
     -   **Task 4 – Upload (`upTemp`)**  
         When WiFi is OK and a new temperature is ready, it opens a TCP connection and sends a simple HTTP GET with the latest temperature using the ESP8266.
@@ -91,27 +91,14 @@ Binary semaphores are used for synchronization between **sensor**, **status**, a
 
 * * *
 
-## 📘 Project Overview (Short)
-
-This project is mainly for **practice and learning**:
-
--   It shows how to **structure a non-trivial STM32 project** using FreeRTOS instead of writing everything inside `while(1)` with `HAL_Delay()`.
-    
--   It combines **ADC (LM35)**, **I²C (RTC + EEPROM/FRAM)**, **UART (ESP8266)** and **HD44780 LCD** in a single firmware.
-    
--   It demonstrates the basics of talking to **ESP8266 using AT commands**: join WiFi, check link, open TCP, send HTTP, close.
-    
--   It also introduces simple **error handling** and **offline logging**: when WiFi is down, data isn’t lost completely.
-    
-
-* * *
-
 ## 🚀 Getting Started
 
 ### 1\. Clone the Repository
 
-`git clone https://github.com/raayanmini/Smart-Weather-Monitoring-System.git`    
+`git clone https://github.com/raayanmini/Smart-Weather-Monitoring-System.git `  
 `cd Smart-Weather-Monitoring-System`  
+
+* * *
 
 ### 2\. Import into STM32CubeIDE
 
@@ -124,7 +111,9 @@ This project is mainly for **practice and learning**:
 4.  You should see the project with its **`.ioc`** file.
     
 
-### 3\. Regenerate HAL Drivers / Middleware (Important)
+* * *
+
+### 2\.5\. Regenerate HAL Drivers / Middleware (Important)
 
 The repo’s `.gitignore` usually **excludes auto-generated** HAL, CMSIS and Middleware sources.  
 If `Drivers/` and `Middlewares/` are missing or incomplete:
@@ -142,16 +131,20 @@ If `Drivers/` and `Middlewares/` are missing or incomplete:
 
 Without this step, the project will not build.
 
-### 4\. Configure WiFi Credentials & Server
+* * *
 
-Open the WiFi/ESP8266 source file (for example `wifi.c`) and update:
+### 3\. Configure WiFi Credentials & Server
 
-`#define WIFI_SSID		"your-ssid" `  
+Open the WiFi/ESP8266 source file (for example `wifi.c`) and update:  
+
+`#define WIFI_SSID       "your-ssid"`  
 `#define WIFI_PASSWORD   "your-password"`  
 
-If you want to send data to your own server instead of the hard-coded one, adjust the IP/URL and HTTP GET string inside the upload function (typically around `AT+CIPSTART` and the formatted `"GET /...` string).
+If you want to send data to your own server instead of the hard-coded one, adjust the IP/URL and HTTP GET string inside the upload function (around `AT+CIPSTART` and the formatted `"GET /...` string).  
 
-### 5\. Wire the Hardware
+* * *
+
+### 4\. Wire the Hardware
 
 -   Follow the pin mapping defined in the **`.ioc`** file.
     
@@ -168,7 +161,9 @@ If you want to send data to your own server instead of the hard-coded one, adjus
     -   All modules share **GND** and run at **3.3 V** where required.
         
 
-### 6\. Build & Flash
+* * *
+
+### 5\. Build & Flash
 
 1.  Connect the **RaayanMini (STM32F401)** board via **ST-Link**.
     
@@ -179,7 +174,7 @@ If you want to send data to your own server instead of the hard-coded one, adjus
     -   Click **Run** or **Debug** to flash the firmware.
         
 
-On reset, you should see:
+On reset, you should see:  
 
 -   LCD splash → RTC check → WiFi init messages.
     
@@ -189,36 +184,20 @@ On reset, you should see:
     
 -   Temperature readings will be periodically uploaded via HTTP GET.
     
--   If WiFi fails, basic logs are written to I²C EEPROM instead.
+-   If WiFi fails, basic logs are written to I²C EEPROM/FRAM instead.
     
 
 * * *
 
-## ⚙️ What This Project Teaches
+## ⚙️ What This Project Teaches / Demonstrates
 
--   Using **FreeRTOS (CMSIS-RTOS)** to split a problem into multiple tasks.
+-   Using **FreeRTOS (CMSIS-RTOS)** to split functionality into multiple coordinated tasks.
     
--   Interfacing with **LM35 (ADC)**, **RTC + EEPROM (I²C)**, and **ESP8266 (UART AT)**.
+-   Interfacing with **LM35 (ADC)**, **RTC + EEPROM (I²C)**, and **ESP8266 (UART AT)** in one design.
     
 -   Doing **BCD conversions** and time/date formatting from an external RTC.
     
--   Implementing small but real **state checks** like WiFi link status and fallback logging.
+-   Implementing small but real **state checks** like WiFi link status and a fallback logging path.
     
--   Building a tidy **16x2 LCD UI** for embedded systems (not just UART `printf`).
+-   Building a simple but clean **16x2 LCD UI** for embedded systems instead of relying only on UART `printf`.
     
-
-* * *
-
-## 🔮 Possible Improvements
-
-Some obvious next steps for anyone who wants to extend this:
-
--   Replace dummy humidity with a real humidity sensor.
-    
--   Improve LM35 scaling and calibration routines.
-    
--   Store multiple log records and add a “view log” mode on LCD.
-    
--   Replace plain HTTP GET with **HTTPS** (using a different WiFi module) or **MQTT**.
-    
--   Add button-based UI to change settings (upload period, units, etc.) from the LCD.
