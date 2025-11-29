@@ -73,6 +73,8 @@ If you open the project in STM32CubeIDE and look at the `.ioc` file, you’ll se
 
 `cd Smart-Weather-Monitoring-System`
 
+`git checkout TFT_Version`
+
 ### 2\. Open in STM32CubeIDE  
 
 1.  Open **STM32CubeIDE v1.18.0**
