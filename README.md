@@ -7,7 +7,6 @@ An external **I²C RTC** keeps track of date/time, and there is basic **offline 
 
 This is a **prototyping firmware developed by Kernel Masters students** – the goal is to explore ADC, I²C, UART, RTOS basics and simple IoT-style communication on STM32F4, not to build a production-grade weather station.
 
-* * *
 
 ## 🛠 Hardware & Tools
 
@@ -34,7 +33,6 @@ This is a **prototyping firmware developed by Kernel Masters students** – the 
 
 Exact pin mapping is configured inside the **`.ioc`** file and generated code; that is the single source of truth for pins and peripherals.
 
-* * *
 
 ## 🔧 What the Firmware Does (High Level)
 
@@ -76,7 +74,6 @@ Exact pin mapping is configured inside the **`.ioc`** file and generated code; t
     -   The LCD always shows current **time, date, and temperature**, so the system is still useful even if WiFi is not working.
         
 
-* * *
 
 ## 🧵 RTOS Task Layout
 
@@ -98,7 +95,6 @@ Binary semaphores are used for synchronization between **sensor**, **status**, a
 `Download the repository as .zip`  
 `Extract the .zip file`  
 
-* * *
 
 ### 2\. Import into STM32CubeIDE
 
@@ -109,9 +105,7 @@ Binary semaphores are used for synchronization between **sensor**, **status**, a
 3.  Point it to the project root and import.
     
 4.  You should see the project with its **`.ioc`** file.
-    
 
-* * *
 
 ### 2\.5\. Regenerate HAL Drivers / Middleware (Important)
 
@@ -131,7 +125,6 @@ If `Drivers/` and `Middlewares/` are missing or incomplete:
 
 Without this step, the project will not build.
 
-* * *
 
 ### 3\. Configure WiFi Credentials & Server
 
@@ -142,7 +135,6 @@ Open the WiFi/ESP8266 source file (for example `wifi.c`) and update:
 
 If you want to send data to your own server instead of the hard-coded one, adjust the IP/URL and HTTP GET string inside the upload function (around `AT+CIPSTART` and the formatted `"GET /...` string).  
 
-* * *
 
 ### 4\. Wire the Hardware
 
@@ -161,7 +153,6 @@ If you want to send data to your own server instead of the hard-coded one, adjus
     -   All modules share **GND** and run at **3.3 V** where required.
         
 
-* * *
 
 ### 5\. Build & Flash
 
