@@ -69,11 +69,9 @@ If you open the project in STM32CubeIDE and look at the `.ioc` file, you’ll se
 
 ### 1\. Clone the Repo
 
-`git clone https://github.com/raayanmini/Smart-Weather-Monitoring-System.git`
-
-`cd Smart-Weather-Monitoring-System`
-
-`git checkout TFT_Version`
+`Download the repository as .zip`  
+  
+`Extract the .zip file`  
 
 ### 2\. Open in STM32CubeIDE  
 
