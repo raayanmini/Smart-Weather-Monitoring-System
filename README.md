@@ -95,8 +95,8 @@ Binary semaphores are used for synchronization between **sensor**, **status**, a
 
 ### 1\. Clone the Repository
 
-`git clone https://github.com/raayanmini/Smart-Weather-Monitoring-System.git `  
-`cd Smart-Weather-Monitoring-System`  
+`Download the repository as .zip`  
+`Extract the .zip file`  
 
 * * *
 
